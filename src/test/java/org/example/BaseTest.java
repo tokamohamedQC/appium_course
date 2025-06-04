@@ -1,12 +1,12 @@
 package org.example;
 
 import com.google.common.collect.ImmutableMap;
+import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.remote.RemoteWebElement;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -21,7 +21,6 @@ public class BaseTest {
     public AppiumDriverLocalService serviceBuilder;
     public AndroidDriver driver;
 
-
     @BeforeClass
     public void confiures() throws MalformedURLException {
          serviceBuilder = new AppiumServiceBuilder()
@@ -32,7 +31,6 @@ public class BaseTest {
         options.setDeviceName("appiumCourseandroid");
         options.setApp("C:\\Users\\Lenovo\\appium\\src\\test\\resources\\ApiDemos-debug.apk");
         driver = new AndroidDriver(new URL("http://127.0.0.1:4723"),options);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
     }
 
@@ -48,6 +46,13 @@ public class BaseTest {
                 ImmutableMap.of("elementId", ((RemoteWebElement) element).getId(),
                         "direction" , "left",
                         "percent" , 0.75));
+    }
+
+    public void DragDropGesture(WebElement element, int x, int y){
+        ((JavascriptExecutor) driver).executeScript("mobile: dragGesture",
+                ImmutableMap.of("elementId", ((RemoteWebElement) element).getId(),
+                        "endX", x,
+                        "endY", y));
     }
 
 

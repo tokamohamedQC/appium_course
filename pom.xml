@@ -19,8 +19,9 @@
     <dependency>
       <groupId>io.appium</groupId>
       <artifactId>java-client</artifactId>
-      <version>9.2.3</version>
+      <version>9.4.0</version>
     </dependency>
+
 
     <!-- https://mvnrepository.com/artifact/org.testng/testng -->
     <dependency>
