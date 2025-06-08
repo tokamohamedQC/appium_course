@@ -15,6 +15,8 @@ import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.Duration;
+import java.util.HashMap;
+import java.util.Map;
 
 public class BaseTest {
 
@@ -38,6 +40,13 @@ public class BaseTest {
         ((JavascriptExecutor) driver).executeScript("mobile: longClickGesture",
                 ImmutableMap.of("elementId", ((RemoteWebElement) element).getId(),
                         "duration" ,2000));
+    }
+
+    public void startActivity(){
+//        ((JavascriptExecutor) driver).executeScript("mobile: startActivity", ImmutableMap.of("Intent", "io.appium.android.apis/io.appium.android.apis.preference.PreferenceDependencies"));
+        Map<String, Object> params = new HashMap<>();
+        params.put("command", "am start -n io.appium.android.apis/.preference.PreferenceDependencies");
+        driver.executeScript("mobile: shell", params);
     }
 
 
