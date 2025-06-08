@@ -31,8 +31,10 @@ public class BaseTest {
          serviceBuilder.start();
         UiAutomator2Options options = new UiAutomator2Options();
         options.setDeviceName("appiumCourseandroid");
-        options.setApp("C:\\Users\\Lenovo\\appium\\src\\test\\resources\\ApiDemos-debug.apk");
+//        options.setApp("C:\\Users\\Lenovo\\appium\\src\\test\\resources\\ApiDemos-debug.apk");
+        options.setApp("C:\\Users\\Lenovo\\appium\\src\\test\\resources\\General-Store.apk");
         driver = new AndroidDriver(new URL("http://127.0.0.1:4723"),options);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
     }
 
