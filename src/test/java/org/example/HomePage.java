@@ -21,7 +21,6 @@ public class HomePage extends BaseTest{
 
         for (int i = 0 ; i < productsNameSize ; i++){
            String productName = driver.findElements(By.id("com.androidsample.generalstore:id/productName")).get(i).getText();
-
             if(productName.equalsIgnoreCase("Jordan 6 Rings")){
                 driver.findElements(By.id("com.androidsample.generalstore:id/productAddCart")).get(i).click();
                 String addedToCart = driver.findElements(By.id("com.androidsample.generalstore:id/productAddCart")).get(i).getText();
@@ -29,5 +28,7 @@ public class HomePage extends BaseTest{
             }
         }
         driver.findElement(By.id("com.androidsample.generalstore:id/appbar_btn_cart")).click();
+        String productCart = driver.findElement(By.id("com.androidsample.generalstore:id/productName")).getText();
+        Assert.assertEquals(productCart, "Jordan 6 Rings ");
     }
 }

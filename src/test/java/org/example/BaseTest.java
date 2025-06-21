@@ -30,7 +30,7 @@ public class BaseTest {
                 .withIPAddress("127.0.0.1").usingPort(4723).build();
          serviceBuilder.start();
         UiAutomator2Options options = new UiAutomator2Options();
-        options.setDeviceName("appiumCourseandroid");
+        options.setDeviceName("vivo V2229A");
 //        options.setApp("C:\\Users\\Lenovo\\appium\\src\\test\\resources\\ApiDemos-debug.apk");
         options.setApp("C:\\Users\\Lenovo\\appium\\src\\test\\resources\\General-Store.apk");
         driver = new AndroidDriver(new URL("http://127.0.0.1:4723"),options);
