@@ -2,13 +2,14 @@ package org.example;
 
 import io.appium.java_client.AppiumBy;
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class HomePage extends BaseTest{
 
     @Test(description = "Verifying user able to buy product")
-    public void fillingForms(){
+    public void fillingForms() throws InterruptedException {
         driver.findElement(By.id("com.androidsample.generalstore:id/nameField")).sendKeys("Toka Mohamed");
         driver.hideKeyboard();
         driver.findElement(By.xpath("//android.widget.RadioButton[@text='Female']")).click();
@@ -28,7 +29,9 @@ public class HomePage extends BaseTest{
             }
         }
         driver.findElement(By.id("com.androidsample.generalstore:id/appbar_btn_cart")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.androidsample.generalstore:id/toolbar_title")));
+        wait.until(ExpectedConditions.attributeContains(By.id("com.androidsample.generalstore:id/toolbar_title"),"text","Cart"));
         String productCart = driver.findElement(By.id("com.androidsample.generalstore:id/productName")).getText();
-        Assert.assertEquals(productCart, "Jordan 6 Rings ");
+        Assert.assertEquals(productCart, "Jordan 6 Rings");
     }
 }
