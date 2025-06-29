@@ -69,6 +69,20 @@ public class BaseTest {
                         "endY", y));
     }
 
+    public Double replace(String price){
+        Double amount = Double.parseDouble(price.replaceAll("[$, ]",""));
+        return amount;
+    }
+
+    public Double replaceString(String price){
+        Double amount = Double.parseDouble(price.substring(2));
+        return amount;
+    }
+
+    public boolean isDisplayed(WebElement ele){
+        return ele.isDisplayed();
+    }
+
 
     @AfterClass
     public void tearDown(){
