@@ -6,11 +6,15 @@ import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
+//import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.*;
+//import org.openqa.selenium.chrome.ChromeDriver;
+//import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.RemoteWebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 
 import java.io.File;
 import java.net.MalformedURLException;
@@ -24,6 +28,8 @@ public class BaseTest {
     public AppiumDriverLocalService serviceBuilder;
     public AndroidDriver driver;
     public WebDriverWait wait;
+    public UiAutomator2Options options;
+
 
     @BeforeClass
     public void confiures() throws MalformedURLException {
@@ -31,14 +37,41 @@ public class BaseTest {
                 .withAppiumJS(new File("C:\\Users\\Lenovo\\AppData\\Roaming\\npm\\node_modules\\appium\\build\\lib\\main.js"))
                 .withIPAddress("127.0.0.1").usingPort(4723).build();
          serviceBuilder.start();
-        UiAutomator2Options options = new UiAutomator2Options();
+        options = new UiAutomator2Options();
+        options.setCapability("automationName", "UiAutomator2");
         options.setDeviceName("vivo V2229A");
-//        options.setApp("C:\\Users\\Lenovo\\appium\\src\\test\\resources\\ApiDemos-debug.apk");
         options.setApp("C:\\Users\\Lenovo\\appium\\src\\test\\resources\\General-Store.apk");
+
+
+
+//        options.setCapability("appPackage", "com.android.chrome");
+//        options.setCapability("appActivity", "com.androidsample.generalstore.MainActivity");
+
+        options.setChromedriverExecutable("D:\\chromedriver-win64\\chromedriver.exe");
+//        options.setApp("C:\\Users\\Lenovo\\appium\\src\\test\\resources\\ApiDemos-debug.apk");
+
         driver = new AndroidDriver(new URL("http://127.0.0.1:4723"),options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+//        options.setCapability("browserName", "Chrome");
+//        WebDriverManager.chromedriver().driverVersion("124.0.6367.0").setup();
+//        options.setCapability("chromedriverExecutable", WebDriverManager.chromedriver().getDownloadedDriverPath());
+//        options.setChromedriverExecutable(WebDriverManager.chromedriver().getDownloadedDriverPath());
+//        options.setCapability("chromedriver_autodownload", true);
 
+//        options.setCapability("automationName", "Chromium");
+
+
+
+    }
+
+    @BeforeMethod
+    public void login(){
+        driver.findElement(By.id("com.androidsample.generalstore:id/nameField")).sendKeys("Toka Mohamed");
+        driver.hideKeyboard();
+        driver.findElement(By.xpath("//android.widget.RadioButton[@text='Female']")).click();
+//        driver.findElement(By.id("com.androidsample.generalstore:id/spinnerCountry")).click();
+//        driver.findElement(AppiumBy.androidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(text(\"Egypt\"));")).click();
     }
 
     public void longGesture(WebElement element){
@@ -84,9 +117,9 @@ public class BaseTest {
     }
 
 
-    @AfterClass
-    public void tearDown(){
-        driver.quit();
-        serviceBuilder.stop();
-    }
+//    @AfterClass
+//    public void tearDown(){
+//        driver.quit();
+//        serviceBuilder.stop();
+//    }
 }
