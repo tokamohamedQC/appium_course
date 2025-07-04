@@ -67,11 +67,12 @@ public class CheckOutPage extends BaseTest {
 //        ChromeOptions chromeOptions = new ChromeOptions();
 //        WebDriver driverchrome = new ChromeDriver(chromeOptions);
         driver.activateApp("com.android.chrome");
-//        driver.context("WEBVIEW_com.androidsample.generalstore");
+//                options.setCapability("appPackage", "com.android.chrome");
+//        driver.context("com.androidsample.generalstore.WebViewActivity");
         driver.findElement(By.id("com.android.chrome:id/search_box_text")).sendKeys("Appium");
         driver.pressKey(new KeyEvent(ENTER));
         driver.pressKey(new KeyEvent (BACK));
-//        driver.context("NATIVE_APP");
+        driver.context("NATIVE_APP");
 
     }
 }
